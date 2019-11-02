@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 // **************************************************
 // configuring the database
 // **************************************************
-const dbCreds = require("./config/database.credentials.json");
+const dbCreds = require("./config/mongo.js");
 const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
 // load models
@@ -21,7 +21,7 @@ const HealthCheck = require("./model/healthCheck.js");
 const VoiceSample = require("./model/voiceSample.js");
 
 console.log("Connecting to mongodb...");
-const uri = "mongodb+srv://" + dbCreds.mongoUser + ":" + dbCreds.mongoPassword + "@" + dbCreds.uri + "/voice-app?retryWrites=true&w=majority";
+const uri = "mongodb+srv://" + dbCreds.mongoUser + ":" + dbCreds.mongoPassword + "@" + dbCreds.url + "/voice-app?retryWrites=true&w=majority";
 mongoose
     .connect(uri, {
         useNewUrlParser: true,
