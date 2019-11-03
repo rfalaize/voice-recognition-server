@@ -152,13 +152,13 @@ function handleError(err, res) {
 // validate routes
 // **************************************************
 function validateAdminRequest(req) {
-    if (req.headers["node_api_secret"] === process.env.NODE_API_SECRET_ADMIN) return true;
+    if (req.headers["node_api_secret_admin"] === process.env.NODE_API_SECRET_ADMIN) return true;
     return false;
 }
 
 function validateUserRequest(req) {
-    if (req.headers["node_api_secret"] === process.env.NODE_API_SECRET_ADMIN) return true;
-    if (req.headers["node_api_secret"] === process.env.NODE_API_SECRET_USER) return true;
+    if (req.headers["node_api_secret_admin"] === process.env.NODE_API_SECRET_ADMIN) return true;
+    if (req.headers["node_api_secret_user"] === process.env.NODE_API_SECRET_USER) return true;
     return false;
 }
 
