@@ -119,10 +119,10 @@ app.post("/voice-sample/save", (req, res) => {
     sample.save(function(mongoError) {
         if (mongoError) {
             console.log("An error occured while saving sample:", mongoError);
-            res.json({ status: false, errorMessage: mongoError.message });
+            res.json({ success: false, errorMessage: mongoError.message });
         }
         console.log("Success! document saved:", sample._id);
-        res.json({ status: true, id: sample._id });
+        res.json({ success: true, id: sample._id });
     });
 });
 
@@ -131,7 +131,7 @@ app.delete("/voice-sample/delete/:id", (req, res) => {
         res.sendStatus(403);
         return;
     }
-    VoiceSample.findByIdAndRemove(req.params.id, function(mongoError) {
+    VoiceSample.deleteOne({ _id: req.params.id }, function(mongoError) {
         if (mongoError) handleError(mongoError, res);
         const message = "Document " + req.params.id + " deleted successfully.";
         console.log(message);
@@ -153,12 +153,14 @@ function handleError(err, res) {
 // **************************************************
 function validateAdminRequest(req) {
     if (req.headers["node_api_secret_admin"] === process.env.NODE_API_SECRET_ADMIN) return true;
+    console.log("Couldn't validate admin request");
     return false;
 }
 
 function validateUserRequest(req) {
     if (req.headers["node_api_secret_admin"] === process.env.NODE_API_SECRET_ADMIN) return true;
     if (req.headers["node_api_secret_user"] === process.env.NODE_API_SECRET_USER) return true;
+    console.log("Couldn't validate user request");
     return false;
 }
 
