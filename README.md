@@ -1,17 +1,17 @@
 # Voice server
 
-Rest API to load/save voice data in mongoDB.
+Rest API to load/save voice samples in mongoDB for future training.
 
 ## Dependencies
 
 It's recommended to install the below dependencies globally, even if they are listed as dev dependencies:
-npm install eslint -g
-npm install nodemon -g
+<code>npm install eslint -g</code>
+<code>npm install nodemon -g</code>
 
 ## Run
 
 Run with node:
-node index.js
+<code>node index.js</code>
 
 Run with hot reload in development mode, using nodemon:
-npm start
+<code>npm run watch</code>
